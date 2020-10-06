@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
 
+    signingConfigs {
+        release {
+            storeFile file('E:\\Android projects\\Omics Projects\\AgiAl Publishing House\\jks\\agialpublishinghouse.jks')
+            storePassword 'Agial@123'
+            keyAlias 'Agial'
+            keyPassword 'Agial@123'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion '30.0.1'
 
@@ -13,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
 
 
     }
