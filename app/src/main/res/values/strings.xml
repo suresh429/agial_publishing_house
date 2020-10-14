@@ -45,4 +45,6 @@
     <string name="info_hilarispublisher_com">agial@agialpress.com</string>
     <string name="_325_328_0176">+325 328 0176</string>
     <string name="website">www.agialpress.com</string>
+    <string name="editorial_board">Editorial Board</string>
+    <string name="no_editors_in_the_database">No Editors in the database</string>
 </resources>

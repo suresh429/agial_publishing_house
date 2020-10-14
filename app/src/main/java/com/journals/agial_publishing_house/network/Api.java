@@ -6,6 +6,7 @@ import com.journals.agial_publishing_house.model.ArchiveResponse;
 import com.journals.agial_publishing_house.model.CategoryResponse;
 import com.journals.agial_publishing_house.model.ContactResponse;
 import com.journals.agial_publishing_house.model.CurrentIssueResponse;
+import com.journals.agial_publishing_house.model.EditorialBoardResponse;
 import com.journals.agial_publishing_house.model.InPressResponse;
 import com.journals.agial_publishing_house.model.JournalHomeResponse;
 import com.journals.agial_publishing_house.model.JournalsListResponse;
@@ -58,6 +59,9 @@ public interface Api {
     @POST("contactapi.php")
     Call<ContactResponse> getContactDisplay(@Body JsonObject jsonObject);
 
+    @Headers("Content-Type: application/json")
+    @POST("editorialboardapi.php")
+    Call<EditorialBoardResponse> getEditorialList(@Body JsonObject jsonObject);
 
 
 }

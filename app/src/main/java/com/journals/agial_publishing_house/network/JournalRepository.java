@@ -1,6 +1,7 @@
 package com.journals.agial_publishing_house.network;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,6 +11,7 @@ import com.journals.agial_publishing_house.model.ArchiveResponse;
 import com.journals.agial_publishing_house.model.CategoryResponse;
 import com.journals.agial_publishing_house.model.ContactResponse;
 import com.journals.agial_publishing_house.model.CurrentIssueResponse;
+import com.journals.agial_publishing_house.model.EditorialBoardResponse;
 import com.journals.agial_publishing_house.model.InPressResponse;
 import com.journals.agial_publishing_house.model.JournalHomeResponse;
 import com.journals.agial_publishing_house.model.JournalsListResponse;
@@ -21,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class JournalRepository {
     private MutableLiveData<String> toastMessageObserver;
@@ -329,6 +333,38 @@ public class JournalRepository {
                     toastMessageObserver.setValue(t.getMessage());
                 }
                 //categoryData.setValue(null);
+                progressbarObservable.setValue(false);
+            }
+        });
+        return categoryData;
+    }
+
+    //add contact data response
+    public MutableLiveData<EditorialBoardResponse> getEditorialData(JsonObject jsonObject) {
+        progressbarObservable.setValue(true);
+        MutableLiveData<EditorialBoardResponse> categoryData = new MutableLiveData<>();
+        newsApi.getEditorialList(jsonObject).enqueue(new Callback<EditorialBoardResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<EditorialBoardResponse> call, @NotNull Response<EditorialBoardResponse> response) {
+
+                if (response.isSuccessful()) {
+                    progressbarObservable.setValue(false);
+                    categoryData.setValue(response.body());
+
+                } else {
+                    progressbarObservable.setValue(false);
+                    toastMessageObserver.setValue("Something unexpected happened to our request: " + response.message()); // Whenever you want to show toast use setValue.
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<EditorialBoardResponse> call, @NotNull Throwable t) {
+                if (t instanceof NoConnectivityException) {
+                    // show No Connectivity message to user or do whatever you want.
+                    toastMessageObserver.setValue(t.getMessage());
+                }
+              //  categoryData.setValue(null);
                 progressbarObservable.setValue(false);
             }
         });

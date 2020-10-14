@@ -102,9 +102,7 @@ public class InPressFragment extends Fragment {
                 inPressAdapter.notifyDataSetChanged();
                 fragmentInPressBinding.progressBar.setVisibility(View.GONE);
                 fragmentInPressBinding.txtEmptyView.setVisibility(View.GONE);
-                Log.d(TAG, "onCreateView: "+" data found");
             }else {
-                Log.d(TAG, "onCreateView: "+"NO data");
                 fragmentInPressBinding.recyclerInPressList.setVisibility(View.GONE);
                 fragmentInPressBinding.txtEmptyView.setVisibility(View.VISIBLE);
             }
